@@ -10,7 +10,7 @@ export class CreateClientDto {
     name: string;
 
     @IsEmail({}, {message: 'Email inválido'})
-    @Matches(/^[a-zA-Z0-9._%+-]+@gmail\.com$/, {message: 'Email precisa ser um endereço de gmail'})
+    @Matches(/^[a-zA-Z0-9._%+-]/, {message: 'Email precisa ser um endereço de gmail'})
     email: string;
 
     @IsString()
@@ -22,6 +22,7 @@ export class CreateClientDto {
     telephone_1: string;
 
     @IsString()
+    @IsOptional()
     @Matches(/^\(\d{2}\) \d{4,5}-\d{4}$/, { message: "Número de telefone deve estar no formato (XX) XXXX-XXXX OU (XX) XXXXX-XXXX"})
     telephone_2: string;
 
@@ -29,10 +30,11 @@ export class CreateClientDto {
     niver: string;
 
     @IsString()
-    @Matches(/^\d{2}\.\d{3}\.\d{3}-\d{1}$/, {message: 'RG precisa ser do formato XX.XXX.XXX-XX' })
+    @Matches(/^\d{2}\.\d{3}\.\d{3}-\d{1}$/, {message: 'RG precisa ser do formato XX.XXX.XXX-X' })
     rg: string
 
-    @IsCPFOrCNPJ({ message: 'CPF ou CNPJ inválido!'})
+    @IsString()
+    @IsCPFOrCNPJ()
     cpf_cnpj: string;
 
     @ValidateNested()
